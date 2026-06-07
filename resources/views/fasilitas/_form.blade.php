@@ -82,6 +82,29 @@
 
 
 
-<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-    Simpan
-</button>
+<div class="flex justify-end gap-3 mt-6">
+
+    
+    <a href="{{ route('fasilitas.index') }}" class="px-4 py-2 rounded-xl
+    bg-gray-100 text-gray-700
+    hover:bg-gray-200
+    transition">
+
+        ← Kembali
+
+    </a>
+
+    <button type="submit" class="px-4 py-2 rounded-xl
+    bg-gradient-to-r
+    from-blue-600 to-indigo-600
+    hover:from-blue-700 hover:to-indigo-700
+    text-white
+    shadow-lg
+    transition-all duration-200">
+
+        💾 Simpan
+
+    </button>
+    
+
+</div>

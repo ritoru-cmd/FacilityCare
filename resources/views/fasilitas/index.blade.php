@@ -19,39 +19,75 @@
                         Kelola data fasilitas kampus beserta kondisi dan lokasinya.
                     </p>
 
+
+
                 </div>
+                <div class="flex flex-wrap gap-2">
+                    @auth
 
-                @auth
+                        @if(auth()->user()->role === 'admin')
 
-                    @if(auth()->user()->role === 'admin')
+                            <a href="{{ route('fasilitas.create') }}" class="bg-gradient-to-r from-blue-600 to-indigo-600
+                                                                                                        hover:from-blue-700 hover:to-indigo-700
+                                                                                                        text-white px-3 py-2 rounded-xl
+                                                                                                        shadow-lg transition-all">
 
-                        <a href="{{ route('fasilitas.create') }}" class="bg-gradient-to-r from-blue-600 to-indigo-600
-                                            hover:from-blue-700 hover:to-indigo-700
-                                            text-white px-3 py-2 rounded-xl
-                                            shadow-lg transition-all">
+                                + Tambah Fasilitas
 
-                            + Tambah Fasilitas
+                            </a>
 
-                        </a>
 
-                    @endif
 
-                @endauth
+                        @endif
 
+                    @endauth
+                    <a href="{{ route('fasilitas.pdf') }}" class="bg-red-100 text-red-700 px-3 py-2 rounded-xl">
+
+                        Export PDF
+
+                    </a>
+
+                    <a href="{{ route('fasilitas.excel') }}" class="bg-green-100 text-green-700 px-3 py-2 rounded-xl">
+
+                        Export Excel
+
+                    </a>
+                </div>
             </div>
 
             <form method="GET" class="mb-6">
 
                 <div class="flex gap-3">
 
-                    <input type="text" name="search" value="{{ $search }}" placeholder="Cari fasilitas..." class="flex-1 border border-gray-300 rounded-xl px-4 py-3
-                        focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" name="search" value="{{ $search }}" placeholder="Cari fasilitas..." class="flex-1 flex-wrap gap-3 border border-gray-300 rounded-xl px-4 py-3
+                                            focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
+                    <select name="kondisi" class="border border-gray-300 rounded-xl px-4 py-3">
+
+                        <option value="">
+                            Semua Kondisi
+                        </option>
+
+                        <option value="Baik" {{ $kondisi == 'Baik' ? 'selected' : '' }}>
+                            Baik
+                        </option>
+
+                        <option value="Rusak Ringan" {{ $kondisi == 'Rusak Ringan' ? 'selected' : '' }}>
+                            Rusak Ringan
+                        </option>
+
+                        <option value="Rusak Berat" {{ $kondisi == 'Rusak Berat' ? 'selected' : '' }}>
+                            Rusak Berat
+                        </option>
+
+                    </select>
                     <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-xl transition-all">
 
                         Cari
 
                     </button>
+
+
 
                 </div>
 

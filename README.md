@@ -1,58 +1,276 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# FacilityCare - Sistem Pelaporan Kerusakan Fasilitas Kampus
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Project
 
-## About Laravel
+FacilityCare merupakan aplikasi berbasis Laravel 13 yang digunakan untuk mengelola data fasilitas kampus serta pelaporan kerusakan fasilitas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistem ini membantu proses pencatatan fasilitas, pelaporan kerusakan, pemantauan status perbaikan, dan pembuatan laporan dalam format PDF maupun Excel.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fitur Utama
 
-## Learning Laravel
+### Dashboard
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* Total Kategori Fasilitas
+* Total Fasilitas
+* Total Laporan Kerusakan
+* Statistik Status Laporan
+* Grafik Ringkasan Laporan
+* 5 Laporan Terbaru
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Kategori Fasilitas
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* Tambah Kategori
+* Lihat Kategori
+* Edit Kategori
+* Hapus Kategori
 
-## Agentic Development
+### Fasilitas
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* Tambah Fasilitas
+* Lihat Fasilitas
+* Edit Fasilitas
+* Hapus Fasilitas
+* Filter Kondisi
+* Export PDF
+* Export Excel
+
+### Laporan Kerusakan
+
+* Tambah Laporan
+* Upload Foto Kerusakan
+* Edit Laporan
+* Hapus Laporan
+* Update Status Menggunakan AJAX
+* Export PDF
+* Export Excel
+
+### Hak Akses
+
+#### Admin
+
+* Mengelola Kategori Fasilitas
+* Mengelola Fasilitas
+* Mengelola Laporan Kerusakan
+* Mengakses Dashboard
+
+#### Staff
+
+* Melihat Data Fasilitas
+* Mengelola Laporan Kerusakan
+* Mengakses Dashboard
+
+---
+
+## Teknologi Yang Digunakan
+
+* Laravel 13
+* PHP 8.4
+* MySQL
+* Laravel Breeze
+* Tailwind CSS
+* DomPDF
+* Laravel Excel
+* AJAX (Fetch API)
+
+---
+
+## Struktur Database
+
+### users
+
+* id
+* name
+* email
+* password
+* role
+
+### kategori_fasilitas
+
+* id
+* nama_kategori
+* deskripsi
+
+### fasilitas
+
+* id
+* kategori_fasilitas_id
+* kode_fasilitas
+* nama_fasilitas
+* lokasi
+* kondisi
+* deskripsi
+
+### laporan_kerusakan
+
+* id
+* fasilitas_id
+* pelapor
+* judul_laporan
+* deskripsi_kerusakan
+* foto
+* status
+* tanggal_lapor
+
+---
+
+## Cara Instalasi
+
+### Clone Repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/ritoru-cmd/FacilityCare.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Masuk Ke Folder Project
 
-## Contributing
+```bash
+cd FacilityCare
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Install Dependency PHP
 
-## Code of Conduct
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Install Dependency Frontend
 
-## Security Vulnerabilities
+```bash
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Copy Environment
 
-## License
+```bash
+copy .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+atau Linux:
+
+```bash
+cp .env.example .env
+```
+
+### Generate Key
+
+```bash
+php artisan key:generate
+```
+
+### Buat Database
+
+Buat database baru di MySQL.
+
+Contoh:
+
+```sql
+facilitycare
+```
+
+Kemudian sesuaikan konfigurasi pada file `.env`.
+
+### Migrasi dan Seeder
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### Jalankan Vite
+
+```bash
+npm run dev
+```
+
+### Jalankan Server
+
+```bash
+php artisan serve
+```
+
+---
+
+## Akun Login Seeder
+
+### Admin
+
+Email:
+
+```text
+admin@kampus.test
+```
+
+Password:
+
+```text
+password
+```
+
+### Staff
+
+Email:
+
+```text
+staff@kampus.test
+```
+
+Password:
+
+```text
+password
+```
+
+---
+
+## Screenshot
+
+### Login
+
+(Tambahkan Screenshot)
+
+### Dashboard
+
+(Tambahkan Screenshot)
+
+### Kategori Fasilitas
+
+(Tambahkan Screenshot)
+
+### Fasilitas
+
+(Tambahkan Screenshot)
+
+### Laporan Kerusakan
+
+(Tambahkan Screenshot)
+
+### Export PDF
+
+(Tambahkan Screenshot)
+
+### Export Excel
+
+(Tambahkan Screenshot)
+
+---
+
+## Repository
+
+https://github.com/ritoru-cmd/FacilityCare
+
+---
+
+## Author
+
+Project UTS Pemrograman Web 2
+
+Studi Kasus Nomor 8
+
+**FacilityCare - Sistem Pelaporan Kerusakan Fasilitas Kampus**

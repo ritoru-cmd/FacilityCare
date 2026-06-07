@@ -52,6 +52,16 @@ Route::get(
     [LaporanKerusakanController::class, 'exportExcel']
 )->name('laporan-kerusakan.excel');
 
+Route::get(
+    '/fasilitas-pdf',
+    [FasilitasController::class, 'exportPdf']
+)->name('fasilitas.pdf');
+
+Route::get(
+    '/fasilitas-excel',
+    [FasilitasController::class, 'exportExcel'
+])->name('fasilitas.excel');
+
 Route::patch(
     '/laporan-kerusakan/{id}/status',
     [LaporanKerusakanController::class, 'updateStatus']

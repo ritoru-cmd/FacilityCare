@@ -39,33 +39,118 @@
                 </div>
 
             </div>
-            <p><strong>Fasilitas:</strong> {{ $laporanKerusakan->fasilitas->nama_fasilitas ?? '-' }}</p>
+            <div class="grid md:grid-cols-2 gap-6">
 
-            <p class="mt-2"><strong>Pelapor:</strong> {{ $laporanKerusakan->pelapor }}</p>
+                <div>
 
-            <p class="mt-2"><strong>Judul:</strong> {{ $laporanKerusakan->judul_laporan }}</p>
+                    <p class="mb-4">
 
-            <p class="mt-2"><strong>Status:</strong> {{ $laporanKerusakan->status }}</p>
+                        <strong>Fasilitas:</strong><br>
 
-            <p class="mt-2"><strong>Tanggal:</strong> {{ $laporanKerusakan->tanggal_lapor }}</p>
+                        {{ $laporanKerusakan->fasilitas->nama_fasilitas ?? '-' }}
 
-            @if($laporanKerusakan->foto)
+                    </p>
 
-                <div class="mt-4">
+                    <p class="mb-4">
 
-                    <strong>Foto Kerusakan:</strong>
+                        <strong>Pelapor:</strong><br>
 
-                    <img src="{{ asset('storage/' . $laporanKerusakan->foto) }}" class="mt-2 rounded border w-64">
+                        {{ $laporanKerusakan->pelapor }}
+
+                    </p>
+
+                    <p class="mb-4">
+
+                        <strong>Judul Laporan:</strong><br>
+
+                        {{ $laporanKerusakan->judul_laporan }}
+
+                    </p>
 
                 </div>
 
-            @endif
+                <div>
 
-            <p class="mt-2"><strong>Deskripsi:</strong></p>
+                    <p class="mb-4">
 
-            <p>
-                {{ $laporanKerusakan->deskripsi_kerusakan }}
-            </p>
+                        <strong>Status:</strong><br>
+
+                        @if($laporanKerusakan->status == 'Menunggu')
+
+                            <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm">
+                                ⏳ Menunggu
+                            </span>
+
+                        @elseif($laporanKerusakan->status == 'Diproses')
+
+                            <span class="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm">
+                                🔧 Diproses
+                            </span>
+
+                        @else
+
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
+                                ✅ Selesai
+                            </span>
+
+                        @endif
+
+                    </p>
+
+                    <p class="mb-4">
+
+                        <strong>Tanggal Lapor:</strong><br>
+
+                        {{ \Carbon\Carbon::parse($laporanKerusakan->tanggal_lapor)->format('d M Y') }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+
+                {{-- Foto --}}
+                <div>
+
+                    <h3 class="font-semibold text-gray-800 mb-3">
+                        Foto Kerusakan
+                    </h3>
+
+                    @if($laporanKerusakan->foto)
+
+                        <img src="{{ asset('storage/' . $laporanKerusakan->foto) }}" alt="Foto Kerusakan"
+                            class="rounded-2xl border shadow-md w-full max-w-md">
+
+                    @else
+
+                        <div class="h-64 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400 border">
+
+                            📷 Tidak ada foto
+
+                        </div>
+
+                    @endif
+
+                </div>
+
+                {{-- Deskripsi --}}
+                <div>
+
+                    <h3 class="font-semibold text-gray-800 mb-3">
+                        Deskripsi Kerusakan
+                    </h3>
+
+                    <div class="bg-gray-50 rounded-xl p-4 text-gray-700 min-h-[260px]">
+
+                        {{ $laporanKerusakan->deskripsi_kerusakan }}
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
     </div>

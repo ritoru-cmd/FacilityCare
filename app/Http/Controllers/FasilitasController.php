@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Fasilitas;
 use App\Models\KategoriFasilitas;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FasilitasExport;
 use Illuminate\Http\Request;
 
 class FasilitasController extends Controller
@@ -13,20 +16,35 @@ class FasilitasController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $kondisi = $request->kondisi;
 
         $fasilitas = Fasilitas::with('kategori')
+
             ->when($search, function ($query) use ($search) {
-                $query->where('nama_fasilitas', 'like', "%{$search}%")
-                    ->orWhere('kode_fasilitas', 'like', "%{$search}%")
-                    ->orWhere('lokasi', 'like', "%{$search}%");
+
+                $query->where(function ($q) use ($search) {
+
+                    $q->where('nama_fasilitas', 'like', "%{$search}%")
+                        ->orWhere('kode_fasilitas', 'like', "%{$search}%")
+                        ->orWhere('lokasi', 'like', "%{$search}%");
+
+                });
+
             })
+
+            ->when($kondisi, function ($query) use ($kondisi) {
+
+                $query->where('kondisi', $kondisi);
+
+            })
+
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
         return view(
             'fasilitas.index',
-            compact('fasilitas', 'search')
+            compact('fasilitas', 'search', 'kondisi')
         );
     }
 
@@ -132,6 +150,31 @@ class FasilitasController extends Controller
         return redirect()
             ->route('fasilitas.index')
             ->with('success', 'Fasilitas berhasil diperbarui.');
+    }
+
+
+    public function exportPdf()
+    {
+        $fasilitas = Fasilitas::with('kategori')
+            ->latest()
+            ->get();
+
+        $pdf = Pdf::loadView(
+            'fasilitas.pdf',
+            compact('fasilitas')
+        );
+
+        return $pdf->download(
+            'data-fasilitas.pdf'
+        );
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(
+            new FasilitasExport,
+            'data-fasilitas.xlsx'
+        );
     }
 
     /**
