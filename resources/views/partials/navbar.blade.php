@@ -14,7 +14,7 @@
                 </div>
 
                 <span class="font-bold text-gray-800">
-                    FacilityFix
+                    FacilityCare
                 </span>
 
             </div>

@@ -7,12 +7,12 @@
             <div
                 class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
 
-                F
+                
 
             </div>
 
             <h1 class="mt-5 text-3xl font-bold text-gray-800">
-                FacilityFix
+                FacilityCare
             </h1>
 
             <p class="text-gray-500 mt-2">

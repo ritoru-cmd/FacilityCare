@@ -32,7 +32,7 @@
                 </div>
 
                 <span class="font-bold text-xl text-gray-800">
-                    FacilityFix
+                    FacilityCare
                 </span>
 
             </div>
@@ -254,7 +254,7 @@
 
     <footer class="text-center py-8 text-gray-500">
 
-        © {{ date('Y') }} FacilityFix —
+        © {{ date('Y') }} FacilityCare —
         Sistem Pelaporan Kerusakan Fasilitas
 
     </footer>
