@@ -54,10 +54,9 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-br from-purple-600 to-fuchsia-700
-                                                                                                                                            text-white p-6 rounded-3xl shadow-xl
-                                                                                                                                            hover:-translate-y-1 hover:shadow-2xl
-                                                                                                                                            transition-all duration-300">
+                        class="bg-gradient-to-br from-purple-600 to-fuchsia-700 text-white p-6 rounded-3xl shadow-xl
+                                                                                       hover:-translate-y-1 hover:shadow-2xl
+                                                                                                                                                                transition-all duration-300">
                         <div class="flex justify-between items-center">
                             <h3 class="font-semibold">
                                 Total Laporan
