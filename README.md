@@ -210,7 +210,7 @@ admin@kampus.test
 Password:
 
 ```text
-password
+password123
 ```
 
 ### Staff
@@ -224,40 +224,8 @@ staff@kampus.test
 Password:
 
 ```text
-password
+password123
 ```
-
----
-
-## Screenshot
-
-### Login
-
-(Tambahkan Screenshot)
-
-### Dashboard
-
-(Tambahkan Screenshot)
-
-### Kategori Fasilitas
-
-(Tambahkan Screenshot)
-
-### Fasilitas
-
-(Tambahkan Screenshot)
-
-### Laporan Kerusakan
-
-(Tambahkan Screenshot)
-
-### Export PDF
-
-(Tambahkan Screenshot)
-
-### Export Excel
-
-(Tambahkan Screenshot)
 
 ---
 

@@ -27,10 +27,11 @@
 
                         @if(auth()->user()->role === 'admin')
 
-                            <a href="{{ route('fasilitas.create') }}" class="bg-gradient-to-r from-blue-600 to-indigo-600
-                                                                                                        hover:from-blue-700 hover:to-indigo-700
-                                                                                                        text-white px-3 py-2 rounded-xl
-                                                                                                        shadow-lg transition-all">
+                            <a href="{{ route('fasilitas.create') }}"
+                                class="bg-gradient-to-r from-blue-600 to-indigo-600
+                                                                                                                    hover:from-blue-700 hover:to-indigo-700
+                                                                                                                    text-white px-3 py-2 rounded-xl
+                                                                                                                    shadow-lg transition-all">
 
                                 + Tambah Fasilitas
 
@@ -60,7 +61,7 @@
                 <div class="flex gap-3">
 
                     <input type="text" name="search" value="{{ $search }}" placeholder="Cari fasilitas..." class="flex-1 flex-wrap gap-3 border border-gray-300 rounded-xl px-4 py-3
-                                            focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
                     <select name="kondisi" class="border border-gray-300 rounded-xl px-4 py-3">
 
@@ -95,7 +96,7 @@
 
             <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100">
 
-                <div class="overflow-x-auto">
+                <d class="overflow-x-auto">
 
                     <table class="w-full">
 
@@ -159,13 +160,14 @@
 
                                         @elseif($item->kondisi == 'Rusak Ringan')
 
-                                            <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm">
+                                            <span
+                                                class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm whitespace-nowrap">
                                                 Rusak Ringan
                                             </span>
 
                                         @else
 
-                                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">
+                                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm whitespace-nowrap">
                                                 {{ $item->kondisi }}
                                             </span>
 
@@ -178,65 +180,67 @@
                                     </td>
 
                                     <td class="p-4 space-x-2">
+                                        <div class="flex gap-2">
+                                            @auth
 
-                                        @auth
+                                                @if(auth()->user()->role === 'admin')
 
-                                            @if(auth()->user()->role === 'admin')
+                                                    <a href="{{ route('fasilitas.show', $item->id) }}"
+                                                        class="px-3 py-1 rounded-lg bg-green-100 text-green-700">
 
-                                                <a href="{{ route('fasilitas.show', $item->id) }}"
-                                                    class="px-3 py-1 rounded-lg bg-green-100 text-green-700">
+                                                        Detail
 
-                                                    Detail
+                                                    </a>
 
-                                                </a>
+                                                    <a href="{{ route('fasilitas.edit', $item->id) }}"
+                                                        class="px-3 py-1 rounded-lg bg-blue-100 text-blue-700">
 
-                                                <a href="{{ route('fasilitas.edit', $item->id) }}"
-                                                    class="px-3 py-1 rounded-lg bg-blue-100 text-blue-700">
+                                                        Edit
 
-                                                    Edit
+                                                    </a>
 
-                                                </a>
+                                                    <form action="{{ route('fasilitas.destroy', $item->id) }}" method="POST"
+                                                        class="inline-block">
 
-                                                <form action="{{ route('fasilitas.destroy', $item->id) }}" method="POST" class="inline">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    @csrf
-                                                    @method('DELETE')
+                                                        <button onclick="return confirm('Hapus data ini?')"
+                                                            class="px-3 py-1 rounded-lg bg-red-100 text-red-700">
 
-                                                    <button onclick="return confirm('Hapus data ini?')"
-                                                        class="px-3 py-1 rounded-lg bg-red-100 text-red-700">
+                                                            Hapus
 
-                                                        Hapus
+                                                        </button>
+
+                                                    </form>
+
+                                                @else
+
+                                                    <a href="{{ route('fasilitas.show', $item->id) }}"
+                                                        class="px-3 py-1 rounded-lg bg-green-100 text-green-700">
+
+                                                        Detail
+
+                                                    </a>
+
+                                                    <button type="button" onclick="alert('Anda tidak memiliki akses ke halaman ini.')"
+                                                        class="px-3 py-1 rounded-lg bg-blue-100 text-blue-700">
+
+                                                        Edit 🔒
 
                                                     </button>
 
-                                                </form>
+                                                    <button type="button" onclick="alert('Anda tidak memiliki akses ke halaman ini.')"
+                                                        class="px-3 py-1 rounded-lg bg-red-100 text-red-700">
 
-                                            @else
+                                                        Hapus 🔒
 
-                                                <a href="{{ route('fasilitas.show', $item->id) }}"
-                                                    class="px-3 py-1 rounded-lg bg-green-100 text-green-700">
+                                                    </button>
 
-                                                    Detail
+                                                @endif
 
-                                                </a>
-
-                                                <button type="button" onclick="alert('Anda tidak memiliki akses ke halaman ini.')"
-                                                    class="px-3 py-1 rounded-lg bg-blue-100 text-blue-700">
-
-                                                    Edit 🔒
-
-                                                </button>
-
-                                                <button type="button" onclick="alert('Anda tidak memiliki akses ke halaman ini.')"
-                                                    class="px-3 py-1 rounded-lg bg-red-100 text-red-700">
-
-                                                    Hapus 🔒
-
-                                                </button>
-
-                                            @endif
-
-                                        @endauth
+                                            @endauth
+                                        </div>
 
                                     </td>
 
@@ -264,17 +268,17 @@
 
                     </table>
 
-                </div>
-
-            </div>
-
-            <div class="mt-6">
-
-                {{ $fasilitas->links() }}
-
             </div>
 
         </div>
+
+        <div class="mt-6">
+
+            {{ $fasilitas->links() }}
+
+        </div>
+
+    </div>
 
     </div>
 

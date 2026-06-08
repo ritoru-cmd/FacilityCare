@@ -54,9 +54,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-br from-purple-600 to-fuchsia-700 text-white p-6 rounded-3xl shadow-xl
-                                                                                       hover:-translate-y-1 hover:shadow-2xl
-                                                                                                                                                                transition-all duration-300">
+                        class="bg-gradient-to-br from-purple-600 to-fuchsia-700 text-white p-6 rounded-3xl shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
                         <div class="flex justify-between items-center">
                             <h3 class="font-semibold">
                                 Total Laporan
@@ -110,6 +108,34 @@
                         </p>
                     </div>
 
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h2 class="font-bold text-lg mb-4">
+                            Status Laporan
+                        </h2>
+
+                        <canvas id="statusChart"></canvas>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h2 class="font-bold text-lg mb-4">
+                            Kondisi Fasilitas
+                        </h2>
+
+                        <canvas id="kondisiChart"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow mt-6">
+                    <h2 class="font-bold text-lg mb-4">
+                        Fasilitas per Kategori
+                    </h2>
+
+                    <canvas id="kategoriChart"></canvas>
                 </div>
 
                 {{-- Laporan Terbaru --}}
@@ -173,7 +199,7 @@
                                             <div class="flex items-center gap-3">
 
                                                 <div
-                                                    class="w-10 h-10 rounded-fullbg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                                                    class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
 
                                                     {{ strtoupper(substr($item->pelapor, 0, 1)) }}
 
@@ -251,5 +277,64 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const statusLabels = @json($statusLabels);
+        const statusValues = @json($statusValues);
 
+        new Chart(
+            document.getElementById('statusChart'),
+            {
+                type: 'doughnut',
+
+                data: {
+                    labels: statusLabels,
+
+                    datasets: [{
+                        data: statusValues
+                    }]
+                }
+            }
+        );
+    </script>
+    <script>
+        const kondisiLabels = @json($kondisiLabels);
+        const kondisiValues = @json($kondisiValues);
+
+        new Chart(
+            document.getElementById('kondisiChart'),
+            {
+                type: 'bar',
+
+                data: {
+                    labels: kondisiLabels,
+
+                    datasets: [{
+                        label: 'Jumlah',
+                        data: kondisiValues
+                    }]
+                }
+            }
+        );
+    </script>
+    <script>
+        const kategoriLabels = @json($kategoriLabels);
+        const kategoriValues = @json($kategoriValues);
+
+        new Chart(
+            document.getElementById('kategoriChart'),
+            {
+                type: 'bar',
+
+                data: {
+                    labels: kategoriLabels,
+
+                    datasets: [{
+                        label: 'Jumlah Fasilitas',
+                        data: kategoriValues
+                    }]
+                }
+            }
+        );
+    </script>
 @endsection
